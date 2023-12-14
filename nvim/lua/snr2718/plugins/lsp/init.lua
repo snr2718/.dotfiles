@@ -43,7 +43,9 @@ return {
     cmp.setup({
       mapping = cmp.mapping.preset.insert({
         ["<CR>"] = cmp.mapping.confirm({select = true})
-      })
+      }),
+      completion = {completeopt = "menu,menuone,noinsert"},
+      preselect = cmp.PreselectMode.None
     })
 
     vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
