@@ -26,3 +26,6 @@ vim.keymap.set('n', '<leader>/', ':noh<CR>', {noremap=true})
 -- Move cursor to new window after split
 vim.keymap.set('n', "<leader>vs", ":vsplit<CR><C-w>w", {noremap=true})
 vim.keymap.set('n', "<leader>hs", ":split<CR><C-w>w", {noremap=true})
+
+--Exploreer
+vim.keymap.set('n', '<leader>nt', vim.cmd.Ex)
