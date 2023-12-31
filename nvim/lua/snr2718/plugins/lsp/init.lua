@@ -36,7 +36,8 @@ return {
         'tsserver',
         'eslint',
         'svelte',
-        'lua_ls'
+        'lua_ls',
+        'gopls'
       },
       handlers = {
         lsp_zero.default_setup
