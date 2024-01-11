@@ -29,3 +29,14 @@ vim.keymap.set('n', "<leader>hs", ":split<CR><C-w>w", {noremap=true})
 
 --Exploreer
 vim.keymap.set('n', '<leader>nt', vim.cmd.Ex)
+
+-- Markdown specific
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+    vim.cmd("echo 'Markdown FileType event triggered'")
+        vim.api.nvim_buf_set_keymap(0, 'n', '<leader>st', ':s/^\\(\\s*\\|\\*[ ]\\|\\d+[.]\\)/&\\~\\~/|s/$/\\~\\~/<CR>', { noremap = true, silent = true })
+        vim.cmd("highlight DoneLine guifg=green ctermbg=green")
+        vim.cmd("match DoneLine /.*-- Done\\.\\?$/") -- Match lines ending with "-- Done"
+    end,
+})
