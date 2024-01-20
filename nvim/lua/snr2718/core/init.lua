@@ -36,7 +36,7 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
     vim.cmd("echo 'Markdown FileType event triggered'")
         vim.api.nvim_buf_set_keymap(0, 'n', '<leader>st', ':s/^\\(\\s*\\|\\*[ ]\\|\\d+[.]\\)/&\\~\\~/|s/$/\\~\\~/<CR>', { noremap = true, silent = true })
-        vim.cmd("highlight DoneLine guifg=green ctermbg=green")
+        vim.cmd("highlight DoneLine guifg=green ctermfg=green")
         vim.cmd("match DoneLine /.*-- Done\\.\\?$/") -- Match lines ending with "-- Done"
     end,
 })
