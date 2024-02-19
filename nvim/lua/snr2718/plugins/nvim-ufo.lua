@@ -21,8 +21,8 @@ return { -- UFO
     -- have equivalents for zr and zm because there is no saved fold level.
     -- Consequently, the vim-internal fold levels need to be disabled by setting
     -- them to 99
-    vim.opt.foldlevel = 99
-    vim.opt.foldlevelstart = 99
+    vim.opt.foldlevel = 999
+    vim.opt.foldlevelstart = 999
     -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.foldingRange = {

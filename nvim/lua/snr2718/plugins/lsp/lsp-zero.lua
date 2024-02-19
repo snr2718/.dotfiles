@@ -38,7 +38,8 @@ return {
         'svelte',
         'lua_ls',
         'gopls',
-        'ltex'
+        'ltex',
+        'pyright'
       },
       handlers = {
         lsp_zero.default_setup
