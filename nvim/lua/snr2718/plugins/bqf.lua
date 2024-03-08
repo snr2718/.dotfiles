@@ -5,7 +5,7 @@ return {
     require('bqf').setup({
       preview = {
         win_height = 50,
-        wiin_vheight = 50
+        win_vheight = 50
       }
     })
   end

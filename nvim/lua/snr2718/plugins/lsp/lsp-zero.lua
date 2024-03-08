@@ -39,7 +39,8 @@ return {
         'lua_ls',
         'gopls',
         'ltex',
-        'pyright'
+        'pyright',
+        'sqlls'
       },
       handlers = {
         lsp_zero.default_setup
