@@ -19,18 +19,30 @@ return {
     {'L3MON4D3/LuaSnip'},
     {'rafamadriz/friendly-snippets'},
 
-    -- lsp saga
-    {'nvimdev/lspsaga.nvim'}
+    -- For breadcrumbs
+    {"SmiteshP/nvim-navic"}
   },
   config = function()
     local lsp_zero = require('lsp-zero')
+    local navic = require("nvim-navic")
+    navic.setup({
+      highlight= true
+    })
 
-    lsp_zero.on_attach(function(_, bufnr)
+
+    lsp_zero.on_attach(function(client, bufnr)
+
       lsp_zero.default_keymaps({buffer = bufnr})
+
       local opts = {buffer = bufnr}
       vim.keymap.set({'n', 'x'}, 'gq', function()
         vim.lsp.buf.format({async = false, timeout_ms = 5000})
       end, opts)
+
+      if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+      end
+
     end)
 
     require('mason').setup({})
@@ -79,12 +91,6 @@ return {
         }
       }
     }
-
-    local lspsaga = require('lspsaga')
-    lspsaga.setup({})
-    if (lspsaga.symbol ~= nil) then
-      require(lspsaga.symbol.winbar).get_bar()
-    end
 
   end
 }
