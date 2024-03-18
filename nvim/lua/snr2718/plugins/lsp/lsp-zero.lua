@@ -18,6 +18,9 @@ return {
     -- Snippets
     {'L3MON4D3/LuaSnip'},
     {'rafamadriz/friendly-snippets'},
+
+    -- lsp saga
+    {'nvimdev/lspsaga.nvim'}
   },
   config = function()
     local lsp_zero = require('lsp-zero')
@@ -76,5 +79,12 @@ return {
         }
       }
     }
+
+    local lspsaga = require('lspsaga')
+    lspsaga.setup({})
+    if (lspsaga.symbol ~= nil) then
+      require(lspsaga.symbol.winbar).get_bar()
+    end
+
   end
 }
