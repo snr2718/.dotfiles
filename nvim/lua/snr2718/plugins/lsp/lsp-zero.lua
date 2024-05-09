@@ -32,6 +32,11 @@ return {
 
     lsp_zero.on_attach(function(client, bufnr)
 
+      if vim.bo.filetype == 'markdown' or vim.bo.filetype == 'md' then
+        vim.lsp.stop_client(client.id)
+        return
+      end
+
       lsp_zero.default_keymaps({buffer = bufnr})
 
       local opts = {buffer = bufnr}
@@ -53,7 +58,6 @@ return {
         'svelte',
         'lua_ls',
         'gopls',
-        'ltex',
         'pyright',
         'sqlls'
       },
