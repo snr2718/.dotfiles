@@ -2,20 +2,12 @@ return { -- UFO
   "kevinhwang91/nvim-ufo",
   dependencies = "kevinhwang91/promise-async",
   event = "VimEnter", -- needed for folds to load in time and comments closed
-  keys = {
-    -- stylua: ignore start
-    { "zm", function() require("ufo").closeAllFolds() end, desc = " 󱃄 Close All Folds" },
-    { "zk", function() require("ufo").goPreviousClosedFold() end, desc = " 󱃄 Goto Prev Fold" },
-    { "zj", function() require("ufo").goNextClosedFold() end, desc = " 󱃄 Goto Next Fold" },
-    { "zr", function() require("ufo").openFoldsExceptKinds { "comment", "imports" } end, desc = " 󱃄 Open All Regular Folds" },
-    { "zR", function() require("ufo").openFoldsExceptKinds {} end, desc = " 󱃄 Open All Folds" },
-    -- { "z1", function() require("ufo").closeFoldsWith(1) end, desc = " 󱃄 Close L1 Folds" },
-    -- { "z2", function() require("ufo").closeFoldsWith(2) end, desc = " 󱃄 Close L2 Folds" },
-    -- { "z3", function() require("ufo").closeFoldsWith(3) end, desc = " 󱃄 Close L3 Folds" },
-    -- { "z4", function() require("ufo").closeFoldsWith(4) end, desc = " 󱃄 Close L4 Folds" },
-    -- stylua: ignore end
-  },
   config = function()
+
+    if vim.bo.filetype == 'markdown' or vim.bo.filetype == 'md' then
+      -- vim-markdown plugin will take care of folding
+      return
+    end
     -- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
     -- auto-closing them after leaving insert mode, however ufo does not seem to
     -- have equivalents for zr and zm because there is no saved fold level.
@@ -37,5 +29,13 @@ return { -- UFO
       })
     end
     require('ufo').setup()
+
+    -- Key mappings specific to ufo, only set up when ufo is active
+    local map_opts = { noremap = true, silent = true }
+    vim.api.nvim_set_keymap('n', 'zm', '<cmd>lua require("ufo").closeAllFolds()<CR>', map_opts)
+    vim.api.nvim_set_keymap('n', 'zr', '<cmd>lua require("ufo").openFoldsExceptKinds { "comment", "imports" }<CR>', map_opts)
+    vim.api.nvim_set_keymap('n', 'zR', '<cmd>lua require("ufo").openFoldsExceptKinds {}<CR>', map_opts)
+    vim.api.nvim_set_keymap('n', 'zk', '<cmd>lua require("ufo").goPreviousClosedFold()<CR>', map_opts)
+    vim.api.nvim_set_keymap('n', 'zj', '<cmd>lua require("ufo").goNextClosedFold()<CR>', map_opts)
   end,
 }
