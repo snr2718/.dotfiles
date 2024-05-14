@@ -1,7 +1,3 @@
-[shell]
-program = "/opt/homebrew/bin/zsh"
-args = ["-1"]
-
 [font]
 [font.normal]
 family= "JetBrainsMono NF"
