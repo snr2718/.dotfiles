@@ -1,5 +1,5 @@
 [shell]
-program = "zsh"
+program = "/opt/homebrew/bin/zsh"
 args = ["-1"]
 
 [font]
