@@ -2,7 +2,7 @@ return {
   {
     'sainnhe/gruvbox-material',
     name='gruvbox-material',
-    enabled = true,
+    enabled = false,
     config = function()
       vim.cmd('colorscheme gruvbox-material')
       vim.cmd("highlight MatchParen guibg=red ctermbg=red")
@@ -11,7 +11,7 @@ return {
   {
     "rebelot/kanagawa.nvim",
     name = "kanagawa",
-    enabled = false,
+    enabled = true,
     config = function()
       vim.cmd('colorscheme kanagawa')
     end
