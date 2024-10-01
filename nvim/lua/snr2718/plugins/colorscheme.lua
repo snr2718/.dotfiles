@@ -13,6 +13,14 @@ return {
     name = "kanagawa",
     enabled = true,
     config = function()
+
+      require('kanagawa').setup({
+        overrides = function()
+          return {
+            Visual = { bg = "#3B5B6E" },
+          }
+        end,
+      })
       vim.cmd('colorscheme kanagawa')
     end
   }
