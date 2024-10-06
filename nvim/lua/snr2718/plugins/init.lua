@@ -1,4 +1,7 @@
 return {
+  -- lsp
+  require("snr2718.plugins.lsp"),
+
   -- Appearance
   require("snr2718.plugins.treesitter"),
   require("snr2718.plugins.colorscheme"),
