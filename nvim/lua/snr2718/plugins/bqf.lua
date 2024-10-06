@@ -1,3 +1,4 @@
+-- Shows preview window for quickfix list items.
 return {
   'kevinhwang91/nvim-bqf',
   ft = 'qf',
