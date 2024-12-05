@@ -5,13 +5,23 @@ return {
 	config = function()
 		require("conform").setup({
 			formatters_by_ft = {
-				lua = { "stylua" },
+				-- Golang
 				go = { "goimports", "gofmt" },
+
+				-- javascript / Typescript
 				javascript = { "eslint_d", "prettierd" },
 				typescript = { "eslint_d", "prettierd" },
 				javascriptreact = { "eslint_d", "prettierd" },
 				typescriptreact = { "eslint_d", "prettierd" },
+
+				-- JSON
 				json = { "prettierd" },
+
+				-- Lua
+				lua = { "stylua" },
+
+				-- Python
+				python = { "black" },
 			},
 			format_on_save = {
 				-- lsp_format = "fallback",
