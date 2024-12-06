@@ -11,7 +11,8 @@ return {
 			-- Python
 			python = { "mypy" },
 		}
-		vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+
+		vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
 
 			callback = function()
 				lint.try_lint()
