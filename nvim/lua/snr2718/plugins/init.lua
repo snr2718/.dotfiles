@@ -15,6 +15,9 @@ return {
 	-- lsp
 	require("snr2718.plugins.lsp"),
 
+	-- dap
+	require("snr2718.plugins.dap"),
+
 	-- Appearance
 	require("snr2718.plugins.treesitter"),
 	require("snr2718.plugins.colorscheme"),
