@@ -3,12 +3,12 @@ return {
 		"mfussenegger/nvim-dap",
 		dependencies = {
 
-			-- "nvim-neotest/nvim-nio", -- Add Nvim-Nio dependency
-			-- "rcarriga/nvim-dap-ui", -- Add DAP UI dependency
+			"nvim-neotest/nvim-nio", -- Add Nvim-Nio dependency
+			"rcarriga/nvim-dap-ui", -- Add DAP UI dependency
 		},
 		config = function()
 			local dap = require("dap")
-			-- local dapui = require("dapui")
+			local dapui = require("dapui")
 			dap.set_log_level("TRACE")
 
 			-- Define the Python adapter for nvim-dap
@@ -18,24 +18,24 @@ return {
 				port = 50011, -- Match the debugpy port
 			}
 
-			-- -- Setup DAP UI
-			-- dapui.setup()
+			-- Setup DAP UI
+			dapui.setup()
 
-			-- -- Automatically open/close UI when debugging starts/ends
-			-- dap.listeners.after.event_initialized["dapui_config"] = function()
-			-- 	dapui.open()
-			-- end
-			-- dap.listeners.before.event_terminated["dapui_config"] = function()
-			-- 	dapui.close()
-			-- end
-			-- dap.listeners.before.event_exited["dapui_config"] = function()
-			-- 	dapui.close()
-			-- end
+			-- Automatically open/close UI when debugging starts/ends
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated["dapui_config"] = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close()
+			end
 
-			-- -- Listen for successful connection events
-			-- dap.listeners.after.event_initialized["notify_connection"] = function()
-			-- 	print("[DAP] Successfully connected to the debug server!")
-			-- end
+			-- Listen for successful connection events
+			dap.listeners.after.event_initialized["notify_connection"] = function()
+				print("[DAP] Successfully connected to the debug server!")
+			end
 
 			-- Keybindings for DAP
 			vim.keymap.set("n", "<Leader>ds", function()
