@@ -27,9 +27,6 @@ vim.keymap.set("n", "<leader>/", ":noh<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>vs", ":vsplit<CR><C-w>w", { noremap = true })
 vim.keymap.set("n", "<leader>hs", ":split<CR><C-w>w", { noremap = true })
 
---Exploreer
-vim.keymap.set("n", "<leader>nt", vim.cmd.Ex)
-
 -- Markdown specific
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
