@@ -27,6 +27,9 @@ vim.keymap.set("n", "<leader>/", ":noh<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>vs", ":vsplit<CR><C-w>w", { noremap = true })
 vim.keymap.set("n", "<leader>hs", ":split<CR><C-w>w", { noremap = true })
 
+-- Delete file in current buffer
+-- vim.keymap.set("n", "<leader>df", ":call delete(expand('%')) | bdelete!<CR>", { noremap = true })
+
 -- Markdown specific
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
