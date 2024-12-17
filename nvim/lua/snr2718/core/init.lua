@@ -34,46 +34,35 @@ vim.keymap.set("n", "<leader>hs", ":split<CR><C-w>w", { noremap = true })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function()
-		-- Define a helper function to replace TODO status
+		-- Autosave toggle
+		local autosave = true
+
+		-- Define a helper function to replace TODO status and autosave
 		local function set_todo_status(status)
 			local line = vim.api.nvim_get_current_line()
-
-			-- Pattern to match Markdown checklist items
 			local new_line = line:gsub("^%s*%- %[.%]", "- [" .. status .. "]")
 			vim.api.nvim_set_current_line(new_line)
+
+			-- Autosave if enabled
+			if autosave then
+				vim.cmd("silent! write")
+			end
 		end
 
 		-- Keymaps for changing TODO statuses
-
-		vim.api.nvim_buf_set_keymap(0, "n", "<leader>to", "", {
-			noremap = true,
-			silent = true,
-			callback = function()
-				set_todo_status(" ")
-			end, -- Open
-		})
-
-		vim.api.nvim_buf_set_keymap(0, "n", "<leader>ta", "", {
-			noremap = true,
-			silent = true,
-			callback = function()
-				set_todo_status("-")
-			end, -- Active
-		})
-		vim.api.nvim_buf_set_keymap(0, "n", "<leader>td", "", {
-			noremap = true,
-			silent = true,
-			callback = function()
-				set_todo_status("x")
-			end, -- Done
-		})
-		vim.api.nvim_buf_set_keymap(0, "n", "<leader>tc", "", {
-			noremap = true,
-			silent = true,
-			callback = function()
-				set_todo_status("~")
-			end, -- Cancelled
-		})
+		local opts = { noremap = true, silent = true, buffer = true }
+		vim.keymap.set("n", "<leader>to", function()
+			set_todo_status(" ")
+		end, opts) -- Open
+		vim.keymap.set("n", "<leader>ta", function()
+			set_todo_status("-")
+		end, opts) -- Active
+		vim.keymap.set("n", "<leader>td", function()
+			set_todo_status("x")
+		end, opts) -- Done
+		vim.keymap.set("n", "<leader>tc", function()
+			set_todo_status("~")
+		end, opts) -- Cancelled
 	end,
 })
 
