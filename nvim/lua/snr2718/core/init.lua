@@ -34,8 +34,6 @@ vim.keymap.set("n", "<leader>hs", ":split<CR><C-w>w", { noremap = true })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function()
-		vim.cmd("echo 'Markdown FileType event triggered'")
-
 		-- Define a helper function to replace TODO status
 		local function set_todo_status(status)
 			local line = vim.api.nvim_get_current_line()
