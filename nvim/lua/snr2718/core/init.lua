@@ -35,15 +35,47 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function()
 		vim.cmd("echo 'Markdown FileType event triggered'")
-		vim.api.nvim_buf_set_keymap(
-			0,
-			"n",
-			"<leader>st",
-			":s/^\\(\\s*\\|\\*[ ]\\|\\d+[.]\\)/&\\~\\~/|s/$/\\~\\~/<CR>",
-			{ noremap = true, silent = true }
-		)
-		vim.cmd("highlight DoneLine guifg=green ctermfg=green")
-		vim.cmd("match DoneLine /.*-- Done\\.\\?$/") -- Match lines ending with "-- Done"
+
+		-- Define a helper function to replace TODO status
+		local function set_todo_status(status)
+			local line = vim.api.nvim_get_current_line()
+
+			-- Pattern to match Markdown checklist items
+			local new_line = line:gsub("^%s*%- %[.%]", "- [" .. status .. "]")
+			vim.api.nvim_set_current_line(new_line)
+		end
+
+		-- Keymaps for changing TODO statuses
+
+		vim.api.nvim_buf_set_keymap(0, "n", "<leader>to", "", {
+			noremap = true,
+			silent = true,
+			callback = function()
+				set_todo_status(" ")
+			end, -- Open
+		})
+
+		vim.api.nvim_buf_set_keymap(0, "n", "<leader>ta", "", {
+			noremap = true,
+			silent = true,
+			callback = function()
+				set_todo_status("-")
+			end, -- Active
+		})
+		vim.api.nvim_buf_set_keymap(0, "n", "<leader>td", "", {
+			noremap = true,
+			silent = true,
+			callback = function()
+				set_todo_status("x")
+			end, -- Done
+		})
+		vim.api.nvim_buf_set_keymap(0, "n", "<leader>tc", "", {
+			noremap = true,
+			silent = true,
+			callback = function()
+				set_todo_status("~")
+			end, -- Cancelled
+		})
 	end,
 })
 
