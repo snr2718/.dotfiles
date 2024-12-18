@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		-- Define a helper function to replace TODO status and autosave
 		local function set_todo_status(status)
 			local line = vim.api.nvim_get_current_line()
-			local new_line = line:gsub("^%s*%- %[.%]", "- [" .. status .. "]")
+			local new_line = line:gsub("^(%s*%-) %[.%]", "%1 [" .. status .. "]")
 			vim.api.nvim_set_current_line(new_line)
 
 			-- Autosave if enabled
