@@ -23,8 +23,11 @@ return {
 
 			-- Automatically open/close UI when debugging starts/ends
 			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open()
+				vim.schedule(function()
+					dapui.open()
+				end)
 			end
+
 			dap.listeners.before.event_terminated["dapui_config"] = function()
 				dapui.close()
 			end
@@ -36,6 +39,11 @@ return {
 			dap.listeners.after.event_initialized["notify_connection"] = function()
 				print("[DAP] Successfully connected to the debug server!")
 			end
+
+			-- Keybindings for DAP UI
+			vim.keymap.set("n", "<Leader>du", function()
+				dapui.toggle()
+			end, { desc = "Toggle DAP UI" })
 
 			-- Keybindings for DAP
 			vim.keymap.set("n", "<Leader>ds", function()
