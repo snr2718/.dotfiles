@@ -28,7 +28,7 @@ return {
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				local opts = { buffer = event.buf }
 
-				if client.server_capabilities.documentFormattingProvider then
+				if client.server_capabilities.documentSymbolProvider then
 					navic.attach(client, event.buf)
 				end
 
