@@ -21,14 +21,6 @@ end
 local poetry_venv = get_poetry_venv()
 if poetry_venv then
 	local poetry_bin = poetry_venv .. "/bin"
-
-	-- Set Python host for Neovim
 	vim.g.python3_host_prog = poetry_bin .. "/python"
-
-	-- Prepend Poetry's virtual environment bin directory to PATH
 	vim.env.PATH = poetry_bin .. ":" .. vim.env.PATH
-
-	print("Using Poetry virtual environment: " .. poetry_bin)
-else
-	print("No Poetry environment found. Using system Python.")
 end
