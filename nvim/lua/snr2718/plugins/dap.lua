@@ -5,18 +5,24 @@ return {
 
 			"nvim-neotest/nvim-nio", -- Add Nvim-Nio dependency
 			"rcarriga/nvim-dap-ui", -- Add DAP UI dependency
+			"mfussenegger/nvim-dap-python", -- Add Python adapter dependency
 		},
 		config = function()
 			local dap = require("dap")
 			local dapui = require("dapui")
-			dap.set_log_level("TRACE")
+			local dap_python = require("dap-python")
+			-- local dap_vscode = require("dap.ext.vscode")
 
-			-- Define the Python adapter for nvim-dap
-			dap.adapters.python = {
-				type = "server",
-				host = "127.0.0.1", -- Match the debugpy host
-				port = 50011, -- Match the debugpy port
-			}
+			local poetry_venv = require("snr2718.utils").get_poetry_venv()
+			local python_path = poetry_venv and (poetry_venv .. "/bin/python") or "python"
+
+			dap_python.setup(python_path)
+
+			for _, config in ipairs(dap.configurations.python or {}) do
+				if not config.pythonPath or config.pythonPath == "" then
+					config.pythonPath = python_path
+				end
+			end
 
 			-- Setup DAP UI
 			dapui.setup()
@@ -39,6 +45,15 @@ return {
 			dap.listeners.after.event_initialized["notify_connection"] = function()
 				print("[DAP] Successfully connected to the debug server!")
 			end
+
+			-- Keybindings for Python debugging
+			vim.keymap.set("n", "<Leader>dpr", function()
+				dap_python.test_method()
+			end, { desc = "Run Python test method" })
+
+			vim.keymap.set("n", "<Leader>dpc", function()
+				dap_python.debug_selection()
+			end, { desc = "Debug selected Python code" })
 
 			-- Keybindings for DAP UI
 			vim.keymap.set("n", "<Leader>du", function()
@@ -65,15 +80,14 @@ return {
 				dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 			end, { desc = "Set Conditional Breakpoint" })
 			vim.keymap.set("n", "<Leader>de", function()
-				local session = require("dap").session()
+				local session = dap.session()
 				if session then
 					if session.config.request == "attach" then
 						print("[DAP] Detaching from the debug server.")
-
-						require("dap").disconnect()
+						dap.disconnect()
 					else
 						print("[DAP] Terminating the debug session.")
-						require("dap").terminate()
+						dap.terminate()
 					end
 				else
 					print("[DAP] No active debug session.")
