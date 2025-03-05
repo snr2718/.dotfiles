@@ -33,5 +33,8 @@ return {
 
 	require("snr2718.plugins.render-markdown"),
 
+	-- Git
+	require("snr2718.plugins.git"),
+
 	require("snr2718.plugins.hardtime"),
 }
