@@ -15,7 +15,9 @@ return {
 		require("telescope").load_extension("live_grep_args")
 
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-		vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+		vim.keymap.set("n", "<leader>fg", function()
+			require("telescope").extensions.live_grep_args.live_grep_args()
+		end, { silent = true, desc = "Live grep with arguments" })
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 		vim.keymap.set("n", "<Leader>fr", builtin.oldfiles, {})
 
