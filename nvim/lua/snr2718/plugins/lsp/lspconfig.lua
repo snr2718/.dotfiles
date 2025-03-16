@@ -2,21 +2,12 @@
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
-        {"williamboman/mason.nvim"},
-        {"williamboman/mason-lspconfig.nvim"},
 		{ "SmiteshP/nvim-navic" },
 	},
 	config = function()
-
 		vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
 		vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
 		vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
-
-
-        require("mason").setup()
-        require("mason-lspconfig").setup({
-            ensure_installed = {"lua_ls", "rust_analzyer", "ts_ls", "pyright"}
-        })
 
 		local navic = require("nvim-navic")
 		navic.setup({

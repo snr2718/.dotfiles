@@ -2,6 +2,7 @@
   "version": "0.2",
   "language": "en",
   "words": [
+    "autocmd",
     "colorscheme",
     "colorschemes",
     "ctermbg",
@@ -9,10 +10,14 @@
     "gruvbox",
     "guibg",
     "kanagawa",
+    "keymap",
+    "lspconfig",
     "morhetz",
     "nightfox",
     "nvim",
+    "navic",
     "pyproject",
+    "pyright",
     "rebelot",
     "tokyonight",
     "venv"
