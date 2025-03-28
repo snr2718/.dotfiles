@@ -47,4 +47,4 @@ local function select_colorscheme(scheme)
 end
 
 -- Example Usage:
-return select_colorscheme("nightfox") -- Change to your preferred colorscheme
+return select_colorscheme("kanagawa") -- Change to your preferred colorscheme
