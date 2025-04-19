@@ -95,3 +95,25 @@ vim.api.nvim_create_autocmd("FileType", {
 		})
 	end,
 })
+
+-- Toggle snake_case to camelCase and vice versa the word under cursor
+local function toggle_case()
+	local word = vim.fn.expand("<cword>")
+	local new_word
+
+	if word:find("_") then
+		-- snake_case to camelCase
+		new_word = word:gsub("_(%w)", function(c)
+			return c:upper()
+		end)
+	else
+		-- camelCase to snake_case
+		new_word = word:gsub("(%u)", function(c)
+			return "_" .. c:lower()
+		end)
+	end
+
+	vim.cmd("normal! ciw" .. new_word)
+end
+
+vim.keymap.set("n", "<leader>cc", toggle_case, { desc = "Toggle snake_case ↔ camelCase" })
