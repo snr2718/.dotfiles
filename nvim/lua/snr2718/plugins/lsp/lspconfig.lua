@@ -71,17 +71,21 @@ return {
 			},
 		})
 
-        lspconfig.rust_analyzer.setup({
-            capabilities = capabilities,
-            settings = {
-                ['rust_analyzer'] = {
-                    diagnostics = {
-                        enable = true
-                    },
-                    cargo = { allFeatures = true },
-                    checkOnSave = { command = "clippy" }
-                }
-            }
-        })
+		lspconfig.rust_analyzer.setup({
+			capabilities = capabilities,
+			settings = {
+				["rust_analyzer"] = {
+					diagnostics = {
+						enable = true,
+					},
+					cargo = { allFeatures = true },
+					checkOnSave = { command = "clippy" },
+				},
+			},
+		})
+
+		lspconfig.csharp_ls.setup({
+			capabilities = capabilities,
+		})
 	end,
 }
