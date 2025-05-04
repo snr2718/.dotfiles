@@ -11,6 +11,16 @@ return {
 			-- Python
 			python = { "mypy", "cspell" },
 			lua = { "cspell" },
+			sql = { "sqlfluff" },
+		}
+
+		lint.linters.sqlfluff = {
+			cmd = "sqlfluff",
+			args = { "lint", "-" },
+			stdin = true,
+			cwd = function()
+				return vim.fn.getcwd() -- or the root of your repo if you use a rooter
+			end,
 		}
 
 		vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {

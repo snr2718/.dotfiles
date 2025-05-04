@@ -23,7 +23,9 @@ return {
 				-- Python
 				python = { "black" },
 
-                rust = {"rustfmt"}
+				rust = { "rustfmt" },
+
+				sql = { "sqlfluff" },
 			},
 			format_on_save = {
 				-- lsp_format = "fallback",
