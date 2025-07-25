@@ -34,7 +34,37 @@ return {
 	require("snr2718.plugins.render-markdown"),
 
 	-- Git
-	require("snr2718.plugins.git"),
+	{
+		{
+			"tpope/vim-fugitive",
+			event = "VeryLazy",
+		},
+		{
+			"sindrets/diffview.nvim",
+			event = "VeryLazy",
+		},
+		{
+			"lewis6991/gitsigns.nvim",
+			event = "VeryLazy",
+		},
+	},
 
+	-- Which-key
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
+			},
+		},
+	},
+
+	-- Hardtime
+	-- Enforces good nvim practices by limiting certain key presses
 	require("snr2718.plugins.hardtime"),
 }
