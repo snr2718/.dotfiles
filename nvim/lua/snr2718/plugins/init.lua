@@ -49,6 +49,9 @@ return {
 		},
 	},
 
+	-- Harpoon
+	require("snr2718.plugins.harpoon"),
+
 	-- Which-key
 	{
 		"folke/which-key.nvim",
