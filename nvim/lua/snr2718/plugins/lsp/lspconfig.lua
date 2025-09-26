@@ -49,8 +49,17 @@ return {
 			capabilities = capabilities,
 		})
 
-		lspconfig.pyright.setup({
+		-- lspconfig.pyright.setup({
+		-- 	capabilities = capabilities,
+		-- })
+
+		lspconfig["basedpyright"].setup({
 			capabilities = capabilities,
+			settings = {
+				basedpyright = {
+					typeCheckingMode = "standard",
+				},
+			},
 		})
 
 		lspconfig.lua_ls.setup({
