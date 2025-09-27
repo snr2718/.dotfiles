@@ -9,6 +9,7 @@ mods = "Control"
 chars = "\u0000"
 
 [font]
+size = 10.0
 [font.normal]
 family = "JetBrainsMono NF"
 style = "Regular"
