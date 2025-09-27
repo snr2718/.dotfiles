@@ -1,19 +1,7 @@
 -- TODO: Setup nvim-navic for breadcrumbs.
 return {
 	"neovim/nvim-lspconfig",
-	dependencies = {
-		{ "SmiteshP/nvim-navic" },
-	},
 	config = function()
-		vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
-		vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-		vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
-
-		local navic = require("nvim-navic")
-		navic.setup({
-			highlight = true,
-		})
-
 		vim.api.nvim_create_autocmd("LspAttach", {
 			desc = "LSP actions",
 			callback = function(event)
@@ -24,10 +12,6 @@ return {
 
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				local opts = { buffer = event.buf }
-
-				if client.server_capabilities.documentSymbolProvider then
-					navic.attach(client, event.buf)
-				end
 
 				-- these will be buffer-local keybindings
 				-- because they only work if you have an active language server

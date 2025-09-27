@@ -4,7 +4,7 @@ return {
 	config = function()
 		require("lualine").setup({
 			options = {
-				theme = require("lualine.themes.solarized_dark"),
+				theme = require("lualine.themes.base16"),
 			},
 			tabline = {
 				lualine_c = { { "filename", path = 1 } },

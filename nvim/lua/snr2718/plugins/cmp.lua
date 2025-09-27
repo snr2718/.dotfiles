@@ -55,16 +55,5 @@ return {
 			completion = { completeopt = "menu,menuone,noinsert" },
 			preselect = cmp.PreselectMode.None,
 		})
-
-		vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
-
-		vim.diagnostic.config({
-			virtual_text = {
-				source = true,
-			},
-			float = {
-				source = true,
-			},
-		})
 	end,
 }

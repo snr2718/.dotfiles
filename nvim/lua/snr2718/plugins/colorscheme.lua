@@ -1,7 +1,6 @@
 return {
-	"catppuccin/nvim",
-	name = "catppuccin",
+	"rebelot/kanagawa.nvim",
 	config = function()
-		vim.cmd("colorscheme catppuccin")
+		vim.cmd.colorscheme("kanagawa-dragon")
 	end,
 }
