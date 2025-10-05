@@ -5,49 +5,49 @@ return {
 		vim.api.nvim_create_autocmd("LspAttach", {
 			desc = "LSP actions",
 			callback = function(event)
-				if vim.bo.filetype == "markdown" or vim.bo.filetype == "md" then
-					vim.lsp.stop_client(event.client_id)
+				local filetype = vim.bo[event.buf].filetype
+				if filetype == "markdown" or filetype == "md" then
+					vim.lsp.stop_client(event.data.client_id)
 					return
 				end
 
-				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				local opts = { buffer = event.buf }
 
 				-- these will be buffer-local keybindings
 				-- because they only work if you have an active language server
 
-				vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-				vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-				vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-				vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-				vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-				vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-				vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-				vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+				vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
+				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+				vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 			end,
 		})
 
-		local lspconfig = require("lspconfig")
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
-		lspconfig.ts_ls.setup({
+		vim.lsp.config("*", {
 			capabilities = capabilities,
 		})
 
-		-- lspconfig.pyright.setup({
-		-- 	capabilities = capabilities,
-		-- })
+		vim.lsp.config("ts_ls", {})
+		vim.lsp.enable("ts_ls")
 
-		lspconfig["basedpyright"].setup({
-			capabilities = capabilities,
+		-- vim.lsp.config("pyright", {})
+		-- vim.lsp.enable("pyright")
+
+		vim.lsp.config("basedpyright", {
 			settings = {
 				basedpyright = {
 					typeCheckingMode = "standard",
 				},
 			},
 		})
+		vim.lsp.enable("basedpyright")
 
-		lspconfig.lua_ls.setup({
-			capabilities = capabilities,
+		vim.lsp.config("lua_ls", {
 			settings = {
 				Lua = {
 					diagnostics = {
@@ -63,9 +63,9 @@ return {
 				},
 			},
 		})
+		vim.lsp.enable("lua_ls")
 
-		lspconfig.rust_analyzer.setup({
-			capabilities = capabilities,
+		vim.lsp.config("rust_analyzer", {
 			settings = {
 				["rust_analyzer"] = {
 					diagnostics = {
@@ -76,9 +76,9 @@ return {
 				},
 			},
 		})
+		vim.lsp.enable("rust_analyzer")
 
-		lspconfig.csharp_ls.setup({
-			capabilities = capabilities,
-		})
+		vim.lsp.config("csharp_ls", {})
+		vim.lsp.enable("csharp_ls")
 	end,
 }
