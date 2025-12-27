@@ -80,5 +80,23 @@ return {
 
 		vim.lsp.config("csharp_ls", {})
 		vim.lsp.enable("csharp_ls")
+
+		vim.lsp.config("gopls", {
+			settings = {
+				gopls = {
+					analyses = {
+						shadow = true, -- detect variable shadowing
+						unusedparams = true, -- flag unused function parameters
+						nilness = true, -- nil flow analysis
+						unusedwrite = true, -- writes to unused variables
+						useany = true, -- warn when using interface{} / any unnecessarily
+						atomicalign = true, -- detect incorrect atomic alignment
+					},
+					staticcheck = true, -- enables many additional checks
+				},
+			},
+		})
+
+		vim.lsp.enable("gopls")
 	end,
 }

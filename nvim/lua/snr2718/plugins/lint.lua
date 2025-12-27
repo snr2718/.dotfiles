@@ -12,6 +12,10 @@ return {
 			python = { "mypy", "cspell" },
 			lua = { "cspell" },
 			sql = { "sqlfluff" },
+
+			go = { "golangcilint" },
+			gomod = { "golangcilint" },
+			gosum = { "golangcilint" },
 		}
 
 		lint.linters.sqlfluff = {
