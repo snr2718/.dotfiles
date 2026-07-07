@@ -12,6 +12,19 @@ return {
 	},
 	config = function()
 		local builtin = require("telescope.builtin")
+		local actions = require("telescope.actions")
+
+		require("telescope").setup({
+			defaults = {
+				mappings = {
+					i = {
+						["<C-j>"] = actions.move_selection_next,
+						["<C-k>"] = actions.move_selection_previous,
+					},
+				},
+			},
+		})
+
 		require("telescope").load_extension("live_grep_args")
 
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
