@@ -4,10 +4,10 @@ return {
 		local lint = require("lint")
 		lint.linters_by_ft = {
 			-- Javascript/Typescript
-			javascript = { "eslint_d", "cspell" },
-			javascriptreact = { "eslint_d", "cspell" },
-			typescript = { "eslint_d", "cspell" },
-			typescriptreact = { "eslint_d", "cspell" },
+			javascript = { "oxlint", "cspell" },
+			javascriptreact = { "oxlint", "cspell" },
+			typescript = { "oxlint", "cspell" },
+			typescriptreact = { "oxlint", "cspell" },
 			-- Python
 			python = { "mypy", "cspell" },
 			lua = { "cspell" },

@@ -9,10 +9,10 @@ return {
 				go = { "goimports", "gofmt" },
 
 				-- javascript / Typescript
-				javascript = { "eslint_d", "prettierd" },
-				typescript = { "eslint_d", "prettierd" },
-				javascriptreact = { "eslint_d", "prettierd" },
-				typescriptreact = { "eslint_d", "prettierd" },
+				javascript = { "prettierd" },
+				typescript = { "prettierd" },
+				javascriptreact = { "prettierd" },
+				typescriptreact = { "prettierd" },
 
 				-- JSON
 				json = { "prettierd" },
